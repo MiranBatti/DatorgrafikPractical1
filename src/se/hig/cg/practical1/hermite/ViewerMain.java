@@ -12,7 +12,6 @@ public class ViewerMain
     	
         HermiteViewerPanel panel = new HermiteViewerPanel ();
         ViewerWindow win = new ViewerWindow ("Hermite Spline Viewer", panel);
-        Hermite s = new Hermite(1, 100, 10, 10, 20);
         win.setVisible (true);
     }
 }

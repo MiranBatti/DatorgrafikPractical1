@@ -27,5 +27,6 @@ public class HermiteViewerPanel extends JPanel
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.drawLine(10, 10, 790, 590);
+        //g2.drawPolyline(xPoints, yPoints, nPoints);
     }
 }
