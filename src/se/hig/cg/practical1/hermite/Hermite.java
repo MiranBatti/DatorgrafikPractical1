@@ -2,11 +2,11 @@ package se.hig.cg.practical1.hermite;
 
 public class Hermite 
 {	
-	Point startPoint, endPoint, startTangent, endTangent;
+	private Point startPoint, endPoint, startTangent, endTangent;
 	
 	public Hermite()
 	{
-		this(new Point(50, 200), new Point(200, 200), new Point(50, 400), new Point(200, 100));
+		this(new Point(50, 300), new Point(300, 300), new Point(50, 100), new Point(300, 100));
 	}
 	
 	public Hermite(Point startPoint, Point endPoint, Point startTangent, Point endTangent)
@@ -62,7 +62,7 @@ public class Hermite
 	}
 	
 	/*
-	private void calculateHermite(Point pk, Point pk1, Point dpk, Point dpk1, int nbrOfPoints)//start point, end point, start tangent, end tangent
+	private void calculateHermite2(Point pk, Point pk1, Point dpk, Point dpk1, int nbrOfPoints)//start point, end point, start tangent, end tangent
 	{
 		double[] pX = new double[nbrOfPoints];
 		double[] pY = new double[nbrOfPoints];
