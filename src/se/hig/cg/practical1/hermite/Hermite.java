@@ -33,7 +33,7 @@ public class Hermite
 		*/
 	}
 	
-	public Point calculateHermite(Point pk, Point pk1, Point dpk, Point dpk1, double u)//start point, end point, start tangent, end tangent
+	private Point calculateHermite(Point pk, Point pk1, Point dpk, Point dpk1, double u)//start point, end point, start tangent, end tangent
 	{	
 		double u2 = u * u;
 		double u3 = u * u2;
@@ -44,7 +44,7 @@ public class Hermite
 		return new Point((int)x, (int)y);
 	}
 	
-	public Point getPoint(double u)
+	private Point getPoint(double u)
 	{
 		return calculateHermite(startPoint, endPoint, startTangent, endTangent, u);
 	}
@@ -59,6 +59,34 @@ public class Hermite
 		}
 		
 		return points;
+	}
+	
+	public Point[] getConstraintPoints()
+	{
+		Point[] points = new Point[4];
+		
+		points[0] = startPoint;
+		points[1] = endPoint;
+		points[2] = startTangent;
+		points[3] = endTangent;
+		
+		return points;
+	}
+	
+	public boolean collisionDetection(Point point)
+	{
+		boolean collision = false;
+		int collisions = 0;
+		
+		for (int i = 0; i < getConstraintPoints().length; i++) {
+			if(point.getPointBounds().contains(getConstraintPoints()[i].getPointBounds()))
+				collisions++;
+		}
+		
+		if(collisions > 1)
+			collision = true;
+		
+		return collision;
 	}
 	
 	/*
@@ -128,6 +156,5 @@ public class Hermite
 	public void setEndTangent(Point endTangent) {
 		this.endTangent = endTangent;
 	}
-
 	
 }

@@ -5,8 +5,8 @@ import java.awt.Rectangle;
 public class Point {
     private int X = 0;
     private int Y = 0;
-    private final int WIDTH = 6; //Rectangle boundary width
-    private final int HEIGHT = 6;
+    private final int WIDTH = 30; //Rectangle boundary width
+    private final int HEIGHT = 30;
     private Rectangle rect;
 
 

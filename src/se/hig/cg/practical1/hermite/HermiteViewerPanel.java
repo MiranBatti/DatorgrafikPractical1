@@ -13,7 +13,7 @@ public class HermiteViewerPanel extends JPanel
 {
 	private Hermite hermite;
 	private java.awt.Point mousePt;
-	
+	boolean isPressed = true;
 	/*
 	 * Stub for the viewer panel.
 	 * 
@@ -27,41 +27,58 @@ public class HermiteViewerPanel extends JPanel
     	setSize(800, 600);
         
     	this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        
-    	this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                mousePt = e.getPoint();
-                repaint();
-            }
-        });
-        
+    	
     	this.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
-            public void mouseDragged(MouseEvent e) {
-                int dx = e.getX();
-                int dy = e.getY();
-                if(hermite.getStartPoint().getPointBounds().contains(e.getPoint()))
+            public void mouseDragged(MouseEvent event) {
+                int dx = event.getX();
+                int dy = event.getY();
+                
+                //The problem with this drag method is that if points collide they become merged
+                for (int i = 0; i < hermite.getConstraintPoints().length; i++) {
+					if(hermite.getConstraintPoints()[i].getPointBounds().contains(event.getPoint()))
+					{
+						if(hermite.collisionDetection(hermite.getConstraintPoints()[i]))
+						{
+							hermite.getConstraintPoints()[i].setPoint(dx + 15, dy + 15);
+							break;
+						}
+						hermite.getConstraintPoints()[i].setPoint(dx, dy);
+						
+					}
+					repaint();
+				}
+                
+                /*
+                 *This solves the merging problem but some points take priority over others when dragged
+                if(hermite.getStartPoint().getPointBounds().contains(event.getPoint()))
                 {
                 	hermite.getStartPoint().setPoint(dx, dy);
+                    event.consume();
+                    repaint();
                 }
                 
-                else if(hermite.getEndPoint().getPointBounds().contains(e.getPoint()))
+                else if(hermite.getEndPoint().getPointBounds().contains(event.getPoint()))
                 {
                 	hermite.getEndPoint().setPoint(dx, dy); 
+                    event.consume();
+                    repaint();
                 }
                 
-                else if(hermite.getStartTangent().getPointBounds().contains(e.getPoint()))
+                else if(hermite.getStartTangent().getPointBounds().contains(event.getPoint()))
                 {
                 	hermite.getStartTangent().setPoint(dx, dy); 
+                    event.consume();
+                    repaint();
                 }
                 
-                else if(hermite.getEndTangent().getPointBounds().contains(e.getPoint()))
+                else if(hermite.getEndTangent().getPointBounds().contains(event.getPoint()))
                 {
                 	hermite.getEndTangent().setPoint(dx, dy); 
-                }
-                
-                repaint();
+                    event.consume();
+                    repaint();
+                }*/
+
             }
         });
     }
