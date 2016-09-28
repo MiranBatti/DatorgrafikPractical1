@@ -20,30 +20,22 @@ public class Rasterizer
     }
     
     /*
-     * Method stub for rasterizeLine.
-     * 
-     * TODO:
-     * - Add suitable parameters.
-     * - Implement the DDA algorithm.
+     * Method for rasterizeLine.
      */
     public void rasterizeLine (int x0, int y0, int x1, int y1)
     {
     	float dX = (x1 - x0);
     	float dY = (y1 - y0);
-    	
     	float m = (dY / dX);	//slope
-    	
     	int x = x0;
     	float y = y0;
     	
     	while(x < x1)
     	{
     		raster.setPixel(x, Math.round(y), new int[]{255, 50, 100});
-    		
     		x += 1;
     		y += m;
     	}
-    	
     }
     
     public BufferedImage getRasterImage ()

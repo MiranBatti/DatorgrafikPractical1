@@ -16,7 +16,7 @@ public class RasterViewerMain
 	        RasterViewerWindow win = new RasterViewerWindow ("Raster Viewer", panel);
 	        win.setResizable(false);
 	        
-	        rasterizer.rasterizeLine(0, 0, 800, 600);
+	        rasterizer.rasterizeLine(150, 230, 400, 400);
 	        
 	        File imageFile = new File ("raster.png");
 	        ImageIO.write(rasterizer.getRasterImage (), "png", imageFile);

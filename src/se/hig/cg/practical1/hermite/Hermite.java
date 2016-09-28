@@ -49,6 +49,11 @@ public class Hermite
 		return calculateHermite(startPoint, endPoint, startTangent, endTangent, u);
 	}
 	
+	/**
+	 * Baserat på kod av Viktor Hanstorp(ndi14vhp@student.hig.se)
+	 * @param numberOfPoints
+	 * @return
+	 */
 	public Point[] getPoints(int numberOfPoints)
 	{
 		Point[] points = new Point[numberOfPoints];
