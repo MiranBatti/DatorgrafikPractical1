@@ -22,7 +22,7 @@ public class Hermite
 				(3*u2 - 2*u3) * p1	+	 //pk+1 = -2u3 + 3u2	
 				(u - 2*u2 + u3) * v0 +	 //Dpk = u3-2u2 + u	
 				(-u2 + u3) * v1		  	 //Dpk+1 = u3 - u2
-				;
+				;s
 		*/
 		
 		/*
