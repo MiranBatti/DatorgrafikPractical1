@@ -3,44 +3,52 @@ package se.hig.cg.practical1.hermite;
 import java.awt.Rectangle;
 
 public class Point {
-    private int X = 0;
-    private int Y = 0;
-    private final int WIDTH = 30; //Rectangle boundary width
+    private int x = 0;
+    private int y = 0;
+    public int getWIDTH() {
+		return WIDTH;
+	}
+
+	public int getHEIGHT() {
+		return HEIGHT;
+	}
+
+	private final int WIDTH = 30; //Rectangle boundary width.
     private final int HEIGHT = 30;
     private Rectangle rect;
 
 
     public Point(int x, int y) {
-        X = x;
-        Y = y;
+        this.x = x;
+        this.y = y;
         createBounds();
     }
 
     public Point() {
-
+    	this(0, 0);
     }
 
     public void setPoint(int x, int y)
     {
-    	X = x;
-    	Y = y;
-    	int upperLeftX = X - (WIDTH/2);
-    	int upperLeftY = Y - (HEIGHT/2);
+    	this.x = x;
+    	this.y = y;
+    	int upperLeftX = this.x - (WIDTH/2);
+    	int upperLeftY = this.y - (HEIGHT/2);
     	rect.setBounds(upperLeftX, upperLeftY, WIDTH, HEIGHT);    	
     }
     
     public int getX() {
-        return X;
+        return x;
     }
 
     public int getY() {
-        return Y;
+        return y;
     }
     
     private void createBounds()
     {
-    	int upperLeftX = X - (WIDTH/2);
-    	int upperLeftY = Y - (HEIGHT/2);
+    	int upperLeftX = x - (WIDTH/2);
+    	int upperLeftY = y - (HEIGHT/2);
     	rect = new Rectangle(upperLeftX, upperLeftY, WIDTH, HEIGHT);
     }
     

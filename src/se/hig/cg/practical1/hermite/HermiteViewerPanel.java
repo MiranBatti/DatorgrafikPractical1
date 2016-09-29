@@ -3,7 +3,6 @@ package se.hig.cg.practical1.hermite;
 import java.awt.Graphics;
 import java.awt.Cursor;
 import java.awt.Graphics2D;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JPanel;
@@ -12,18 +11,9 @@ import javax.swing.JPanel;
 public class HermiteViewerPanel extends JPanel
 {
 	private Hermite hermite;
-	private java.awt.Point mousePt;
-	boolean isPressed = true;
-	/*
-	 * Stub for the viewer panel.
-	 * 
-	 * TODO:
-	 * - Add suitable parameters to the constructor
-	 * - Store data as necessary in variables.
-	 * - Implement the drawing code in method paintComponent.
-	 */
-    public HermiteViewerPanel() {
-    	hermite = new Hermite();
+
+    public HermiteViewerPanel(Hermite hermite) {
+    	this.hermite = hermite;
     	setSize(800, 600);
         
     	this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -33,18 +23,18 @@ public class HermiteViewerPanel extends JPanel
             public void mouseDragged(MouseEvent event) {
                 int dx = event.getX();
                 int dy = event.getY();
+                Point[] points = hermite.getConstraintPoints();
                 
                 //The problem with this drag method is that if points collide they become merged
-                for (int i = 0; i < hermite.getConstraintPoints().length; i++) {
-					if(hermite.getConstraintPoints()[i].getPointBounds().contains(event.getPoint()))
+                for (int i = 0; i < points.length; i++) {
+					if(points[i].getPointBounds().contains(event.getPoint()))
 					{
-						if(hermite.collisionDetection(hermite.getConstraintPoints()[i]))
+						if(hermite.collisionDetection(points[i]))
 						{
-							hermite.getConstraintPoints()[i].setPoint(dx + 15, dy + 15);
+							points[i].setPoint(dx + points[i].getWIDTH(), dy + points[i].getHEIGHT());
 							break;
 						}
-						hermite.getConstraintPoints()[i].setPoint(dx, dy);
-						
+						points[i].setPoint(dx, dy);
 					}
 					repaint();
 				}
@@ -90,8 +80,10 @@ public class HermiteViewerPanel extends JPanel
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         
-        g2.drawRect((int)hermite.getStartPoint().getPointBounds().getX(),(int) hermite.getStartPoint().getPointBounds().getY(), (int)hermite.getStartPoint().getPointBounds().getWidth(), (int)hermite.getStartPoint().getPointBounds().getHeight());
+        //represents the area where the point can be dragged.
+//        g2.drawRect((int)hermite.getStartPoint().getPointBounds().getX(),(int) hermite.getStartPoint().getPointBounds().getY(), (int)hermite.getStartPoint().getPointBounds().getWidth(), (int)hermite.getStartPoint().getPointBounds().getHeight());
         
+        g2.drawOval(hermite.getStartPoint().getX(), hermite.getStartPoint().getY(), 4, 4);
         g2.drawString("Pk", hermite.getStartPoint().getX(), hermite.getStartPoint().getY());
         
         g2.drawOval(hermite.getEndPoint().getX(), hermite.getEndPoint().getY(), 4, 4);
@@ -106,7 +98,8 @@ public class HermiteViewerPanel extends JPanel
         g2.drawLine(hermite.getStartPoint().getX(), hermite.getStartPoint().getY(), hermite.getStartTangent().getX(), hermite.getStartTangent().getY());
         g2.drawLine(hermite.getEndPoint().getX(), hermite.getEndPoint().getY(), hermite.getEndTangent().getX(), hermite.getEndTangent().getY());
         
-        Point[] p = hermite.getPoints(20);
+        //Draws the curve.
+        Point[] p = hermite.getPoints(200); //parameter: the number of points on the curve
         int[] x = new int[p.length + 1];
         int[] y = new int[p.length + 1];
         
