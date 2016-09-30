@@ -14,6 +14,7 @@ public class Hermite
 		this.startPoint = startPoint;
 		this.endPoint = endPoint;
 		
+		//Should be Vector objects instead
 		this.startTangent = startTangent;
 		this.endTangent = endTangent;
 	}
@@ -85,8 +86,8 @@ public class Hermite
 	}
 	
 	/**
-	 * This is used to check one point is within another point's boundary rectangle.
-	 * Needed so that mouse dragging won't merge 2 points to 1.
+	 * This is used to check if one point is within another point's boundary rectangle.
+	 * Needed so that mouse dragging won't merge multiple points to 1.
 	 * @param point
 	 * @return
 	 */

@@ -25,7 +25,6 @@ public class HermiteViewerPanel extends JPanel
                 int dy = event.getY();
                 Point[] points = hermite.getConstraintPoints();
                 
-                //The problem with this drag method is that if points collide they become merged
                 for (int i = 0; i < points.length; i++) {
 					if(points[i].getPointBounds().contains(event.getPoint()))
 					{
@@ -38,37 +37,6 @@ public class HermiteViewerPanel extends JPanel
 					}
 					repaint();
 				}
-                
-                /*
-                 *This solves the merging problem but some points take priority over others when dragged
-                if(hermite.getStartPoint().getPointBounds().contains(event.getPoint()))
-                {
-                	hermite.getStartPoint().setPoint(dx, dy);
-                    event.consume();
-                    repaint();
-                }
-                
-                else if(hermite.getEndPoint().getPointBounds().contains(event.getPoint()))
-                {
-                	hermite.getEndPoint().setPoint(dx, dy); 
-                    event.consume();
-                    repaint();
-                }
-                
-                else if(hermite.getStartTangent().getPointBounds().contains(event.getPoint()))
-                {
-                	hermite.getStartTangent().setPoint(dx, dy); 
-                    event.consume();
-                    repaint();
-                }
-                
-                else if(hermite.getEndTangent().getPointBounds().contains(event.getPoint()))
-                {
-                	hermite.getEndTangent().setPoint(dx, dy); 
-                    event.consume();
-                    repaint();
-                }*/
-
             }
         });
     }
